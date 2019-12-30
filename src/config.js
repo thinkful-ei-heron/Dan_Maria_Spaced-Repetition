@@ -1,4 +1,4 @@
 export default {
-  API_ENDPOINT: 'http://localhost:8000/api',
-  TOKEN_KEY: 'blogful-client-auth-token',
+  API_ENDPOINT: 'https://nameless-cliffs-30904.herokuapp.com/',
+  API_KEY: process.env.REACT_APP_API_KEY,
 }
