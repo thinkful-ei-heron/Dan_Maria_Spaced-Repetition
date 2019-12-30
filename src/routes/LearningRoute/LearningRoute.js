@@ -67,7 +67,7 @@ class LearningRoute extends Component {
   handleNextWord = () => {
     this.setState({answer: '', guess: ''})
   }
-  handleguess = () => {
+  handleguess = (e) => {
     const guess = e.target.value; 
     let string = guess.toLowerCase();
     this.setState({ guess: string})
@@ -91,17 +91,14 @@ class LearningRoute extends Component {
       </div>
       )
     }
+    
     return (
       <section className="learning">
         <h1 className='learning-score'>
           {`Your total score is:${this.state.total}`}
         </h1>
       </section>
-
-      <div className='check-guess'>
-        {this.state.guess}
-      </div>
-    );
+    )
   }
 }
 

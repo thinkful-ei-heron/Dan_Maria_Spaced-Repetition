@@ -6,7 +6,7 @@ import config from '../../config'
 export class Dashboard extends Component {
     state = {
         language: '',
-        words: []
+        words: [],
     }
     componentDidMount(){
         fetch(`${config.API_ENDPOINT}/language`, {
@@ -33,16 +33,21 @@ export class Dashboard extends Component {
     render() {
         return (
            <section className="dashboard">
-               <h1>Le Baguette</h1>
-               <h2>Learn French</h2>
-               <h2>
-                   <Link 
-                   to="/learn"
-                   className="start-practice">
-                    start practicing
-                   </Link>
-               </h2>
+                <h1>{this.state.language.name}</h1>
+                <section className="total">
+                Total Score: {this.state.language.total_score}
+                </section>
+
+                <section className="start-practicing-link">
+                    <Link 
+                        to="/learn"
+                        className="start-practice">
+                        start practicing!
+                    </Link>
+                </section>
+                
                <section>
+                   <h1>Words to Practice</h1>
                    <h2> 
                        <ul className="list">
                         {this.state.words.map((word, index) => {
