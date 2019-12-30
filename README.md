@@ -1,3 +1,39 @@
+ # Spaced Repitition
+
+ # About
+ 
+
+## Live page can be found here !
+### ZEIT:
+[]()
+### GITHUB:
+[]()
+
+## Technoligies Used
+Client side: Reactjs, Javascript, HTML and CSS
+Server side: Express.js, Node.js, PostgreSQL
+
+## Links to code 
+Client : [Client]()
+Server: [Server]()
+
+## Screen Shots
+### Home page 
+![Registration page](./images/)
+### Add Item Page
+![Login page](./images/)
+### Add Category Page
+![](./images/)
+
+
+created by : 
+
+
+
+
+
+
+
 # Spaced Repetition Capstone
 
 ## Setup
