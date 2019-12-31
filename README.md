@@ -1,32 +1,39 @@
- # Spaced Repitition
+ # Le Baguette : Learn French with Space Repetition.
 
  # About
- 
+ Before taking a trip to France, learn essential words quickly and effectivley! This application uses space repetition flashcards that keep track of user scores. It also displays the user scores for every word they are learning, letting them know how many times they got it right and how many times they got it wrong. It allows users to create personailzed accounts that diplay their name on the top of the dashboard and lets them keep track of their progress by logging into their personal accounts.
+
+## Account login for demo: 
+### username : admin
+### password: pass
 
 ## Live page can be found here !
 ### ZEIT:
-[]()
-### GITHUB:
-[]()
+[click here for live page](https://spaced-repetition-app.mal3905.now.sh/learn)
+
 
 ## Technoligies Used
-Client side: Reactjs, Javascript, HTML and CSS
+Client side: React, Javascript, HTML and CSS
 Server side: Express.js, Node.js, PostgreSQL
 
 ## Links to code 
-Client : [Client]()
-Server: [Server]()
+Client : [Client](https://github.com/thinkful-ei-heron/Dan_Maria_Spaced-Repetition.git)
+Server: [Server](https://github.com/thinkful-ei-heron/Dan_Maria_Spaced-Repitition-API.git)
 
 ## Screen Shots
-### Home page 
+### Registration page 
 ![Registration page](./images/)
-### Add Item Page
+### Login Page
 ![Login page](./images/)
-### Add Category Page
+### Dashboard
+![](./images/)
+### Learning Page
+![](./images/)
+### Learning Feedback Page
 ![](./images/)
 
 
-created by : 
+created by : Daniel Wagner and Maria Danielson 2019
 
 
 
@@ -34,7 +41,7 @@ created by :
 
 
 
-# Spaced Repetition Capstone
+# Spaced Repetition Capstone Setup
 
 ## Setup
 
