@@ -36,3 +36,138 @@ main {
   width: 85%;
   margin: 0 auto;
 }
+
+.Dashboard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Dashboard__btn {
+  display: grid;
+  place-items: center;
+  height: 45px;
+  width: 200px;
+  margin: 10px auto;
+  background-color: #5a72ff;
+  border-radius: 12px;
+  border: none;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.Dashboard__btn .Dashboard__link {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #f1edff;
+}
+
+.Dashboard__words_header {
+  font-size: 1.4rem;
+}
+
+.Dashboard__list {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  font-weight: 500;
+}
+
+.Dashboard__li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.Dashboard__li:nth-child(even) {
+  background-color: #e5ddff;
+}
+
+.Dashboard__li:nth-child(odd) {
+  background-color: #d0c2fd;
+}
+
+.Dashboard__guessed {
+  display: flex;
+  justify-content: space-between;
+  width: 160px;
+}
+
+.Dashboard__original {
+  margin-right: 15px;
+  font-size: 1.2rem;
+}
+
+.Dashboard__correct-words,
+.Dashboard__inocrrect-words {
+  font-size: 0.95rem;
+}
+
+.LearningRoute__score {
+  width: 100%;
+  margin-bottom: 40px;
+  text-align: right;
+  font-size: 1rem;
+}
+
+.LearningRoute__check-answer {
+  margin-bottom: 20px;
+}
+
+.LearningRoute__translate {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.LearningRoute__word {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #3b59ff;
+}
+
+.LearningRoute__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.LearningRoute__btn {
+  display: grid;
+  place-items: center;
+  height: 35px;
+  width: 200px;
+  margin: 10px auto;
+  background-color: #5a72ff;
+  border-radius: 12px;
+  border: none;
+  font-size: 1em;
+  font-weight: 500;
+  color: #f1edff;
+}
+
+.LearningRoute__correct-feedback,
+.LearningRoute__incorrect-feedback {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.LearningRoute__correct-feedback {
+  color: #3b59ff;
+}
+
+.LearningRoute__incorrect-feedback {
+  color: #fa2b2b;
+}
+
+.LearningRoute__correct-incorrect-info {
+  width: 100%;
+  margin-top: 20px;
+  font-size: 1rem;
+  font-weight: 500;
+}

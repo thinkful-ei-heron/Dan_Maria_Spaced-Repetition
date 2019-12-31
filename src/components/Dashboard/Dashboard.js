@@ -28,27 +28,30 @@ export class Dashboard extends Component {
   }
   render() {
     return (
-      <section className="dashboard">
-        <h1>{this.state.language.name}</h1>
-        <section className="total">Total Score: {this.state.language.total_score}</section>
+      <section className="Dashboard">
+        <div className="Dashboard__header">
+          <h1>{this.state.language.name}</h1>
+          <span className="total">Total Score: {this.state.language.total_score}</span>
+        </div>
 
-        <section className="start-practicing-link">
-          <Link to="/learn" className="start-practice">
-            start practicing!
+        <section className="Dashboard__btn">
+          <Link to="/learn" className="Dashboard__link">
+            Start Practicing!
           </Link>
         </section>
 
         <section>
-          <h1>Words to Practice</h1>
+          <h1 className="Dashboard__words_header">Words to Practice</h1>
           <h2>
-            <ul className="list">
+            <ul className="Dashboard__list">
               {this.state.words.map((word, index) => {
                 return (
-                  <li key={index} className="word">
-                    <h2>{word.original}</h2>
-
-                    <div className="correct-words">correct count: {word.correct_count}</div>
-                    <div className="inocrrect-words">incorrect count: {word.incorrect_count}</div>
+                  <li className="Dashboard__li" key={index}>
+                    <span className="Dashboard__original">{word.original}</span>
+                    <div className="Dashboard__guessed">
+                      <div className="Dashboard__correct-words">correct: {word.correct_count}</div>
+                      <div className="Dashboard__inocrrect-words">incorrect: {word.incorrect_count}</div>
+                    </div>
                   </li>
                 );
               })}

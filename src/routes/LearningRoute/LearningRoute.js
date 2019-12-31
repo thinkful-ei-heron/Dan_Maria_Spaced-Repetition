@@ -25,7 +25,7 @@ class LearningRoute extends Component {
       .then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()))
       .then(data => {
         this.setState({
-          //head: data.nextWord,
+          head: data.nextWord,
           total: data.totalScore,
           correctcount: data.wordCorrectCount,
           incorrectcount: data.wordIncorrectCount,
@@ -46,13 +46,15 @@ class LearningRoute extends Component {
       .then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()))
       .then(data => {
         console.log(data);
+        let original = this.state.head;
         this.setState({
+          head: data.nextWord,
           answer: data.answer,
           correct: data.isCorrect,
-          head: data.nextWord,
           total: data.totalScore,
           correctcount: data.wordCorrectCount,
-          incorrectcount: data.wordIncorrectCount
+          incorrectcount: data.wordIncorrectCount,
+          original: original
         });
       });
   };
@@ -72,44 +74,39 @@ class LearningRoute extends Component {
     if (this.state.correct === true) {
       result = (
         <>
-          <div className="correctFeedback">
-            <h1>You were correct! :D</h1>
-            <h2 className="correct-translation">
-              The correct translation for {this.state.original} was {this.state.answer} and you chose
-              {this.state.guess}!
-            </h2>
-          </div>
+          <p className="LearningRoute__correct-feedback">You were correct! :D</p>
+          <p className="LearningRoute__correct-translation">
+            The correct translation for {this.state.original} was {this.state.answer}!
+          </p>
         </>
       );
     } else if (this.state.correct === false) {
       result = (
         <>
-          <div className="correctFeedback">
-            <h1>Good try, but not quite right :(</h1>
-            <h2 className="correct-translation">
-              The correct translation for {this.state.original} was {this.state.answer} and you chose
-              {this.state.guess}!
-            </h2>
-          </div>
+          <p className="LearningRoute__incorrect-feedback">Good try, but not quite right :(</p>
+          <p className="LearningRoute__correct-translation">
+            The correct translation for {this.state.original} was {this.state.answer} and you chose{' '}
+            {this.state.guess}!
+          </p>
         </>
       );
     }
 
     return (
       <section className="learning">
-        <h1 className="learning-score">{`Your total score is:${this.state.total}`}</h1>
-        <div className="check-answer">
+        <div className="LearningRoute__score">{`Your total score is: ${this.state.total}`}</div>
+        <div className="LearningRoute__check-answer">
           {!this.state.answer ? (
             <>
-              <h1 className="translation">translate the word: </h1>
-              <span className="next">{this.state.original}</span>
+              <h1 className="LearningRoute__translate">Translate the word: </h1>
+              <span className="LearningRoute__word">{this.state.head}</span>
             </>
           ) : (
             <div className="feedback">{this.state.correct ? result : result}</div>
           )}
         </div>
         {!this.state.answer ? (
-          <form className="guess-word" onSubmit={e => this.handleSubmit(e)}>
+          <form className="LearningRoute__form" onSubmit={e => this.handleSubmit(e)}>
             <Label htmlFor="guess-word" className="guess-word-label">
               What's the translation for this word?
             </Label>
@@ -121,21 +118,23 @@ class LearningRoute extends Component {
               name="guess-word"
               required
             />
-            <Button className="submit-button" type="submit">
+            <Button className="LearningRoute__btn" type="submit">
               Submit your answer
             </Button>
           </form>
         ) : (
-          <Button className="next-word-button" onClick={this.handleNextWord}>
+          <Button className="LearningRoute__btn" onClick={this.handleNextWord}>
             Try another word!
           </Button>
         )}
         {!this.state.answer ? (
-          <div className="correct-incorrect-info">
-            <h1>You have answered this word correctly {this.state.correctcount} times!</h1>
+          <div className="LearningRoute__correct-incorrect-info">
+            <span>You have answered this word correctly {this.state.correctcount} times!</span>
           </div>
         ) : (
-          <div>`Continuez à pratiquer, vous êtes un peu plus près d\'aller en France!`</div>
+          <div className="LearningRoute__correct-incorrect-info">
+            Continuez à pratiquer, vous êtes un peu plus près d'aller en France!
+          </div>
         )}
       </section>
     );
