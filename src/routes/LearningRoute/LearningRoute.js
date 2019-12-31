@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import config from '../../config'
 import TokenService from '../../services/token-service'
-import { Label, Input} from '../../components/Form/Form'
+import { Label, Input } from '../../components/Form/Form'
 import Button from '../../components/Button/Button'
 
 
@@ -13,40 +13,49 @@ class LearningRoute extends Component {
     answer: '',
     correctcount: '',
     incorrectcount: '',
-    original: ''
+    original: '',
+    correct: null, 
   };
   componentDidMount() {
     fetch(`${config.API_ENDPOINT}/language/head`, {
       method: 'GET',
       headers: {
-        authorization: `Bearer ${TokenService.getAuthToken()}`
+        Authorization: `Bearer ${TokenService.getAuthToken()}`
       }
     })
-      .then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()))
+      .then(res => 
+      (!res.ok) 
+      ? res.json()
+      .then(e => Promise.reject(e)) : res.json())
       .then(data => {
         this.setState({
           head: data.next,
           total: data.total,
           correctcount: data.correctcount,
           incorrectcount: data.incorrectcount,
-          original: data.original
-        });
-      });
+          original: data.next
+        })
+      })
   }
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     fetch(`${config.API_ENDPOINT}/language/guess`, {
-      method: 'POST',
+      method: "POST",
       headers: {
         Authorization: `Bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json'
+        "content-type": "application/json"
       },
       body: JSON.stringify({ guess: this.state.guess })
     })
-      .then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()))
+      .then(res => 
+      (!res.ok)
+      ? res.json()
+      .then(e => Promise.reject(e)) 
+      : res.json())
       .then(data => {
         this.setState({
           answer: data.answer,
+          correct:data.correct,
           head: data.next,
           total: data.total,
           correctcount: data.correctcount,
@@ -58,76 +67,55 @@ class LearningRoute extends Component {
   handleNextWord = () => {
     this.setState({ answer: '', guess: '' });
   };
-  handleguess = e => {
+
+  handleguess = (e) => {
     const guess = e.target.value;
     let string = guess.toLowerCase();
     this.setState({ guess: string });
   };
 
-  renderFeedback() {
-<<<<<<< HEAD
-    if (this.state.isCorrect === true) {
-      return (
-=======
-
+  render() {
     let result; 
-
-    if(this.state.isCorrect === true) {
-      return result = 
->>>>>>> 31f112ef572e101733ffabc6265171103917abaa
-        <div className="iscorrectFeedback">
+    if (this.state.correct === true) {
+      result = <>
+        <div className="correctFeedback">
           <h1>You were correct! :D</h1>
-          <h2>
-            {' '}
-            The correct translation for {this.state.original} was {this.state.answer} and you chose{' '}
+          <h2 className="correct-translation">
+            The correct translation for {this.state.original} was {this.state.answer} and you chose
             {this.state.guess}!
           </h2>
         </div>
-<<<<<<< HEAD
-      );
-    } else if (this.state.isCorrect === false) {
-      return (
-        <div className="iscorrectFeedback">
-          <h1>Good try, but not quite right :</h1>
-          <h2>
-            {' '}
-            The correct translation for {this.state.original} was {this.state.answer} and you chose{' '}
+        </>   
+    } 
+    else if (this.state.correct === false) {
+     result = (
+       <>
+        <div className="correctFeedback">
+          <h1>Good try, but not quite right :(</h1>
+          <h2 className="correct-translation">
+            The correct translation for {this.state.original} was {this.state.answer} and you chose 
             {this.state.guess}!
           </h2>
         </div>
-      );
-    }
+        </>
+     )
   }
 
-  render() {
     return (
-      <section className="learning">
-        <h1 className="learning-score">{`Your total score is:${this.state.total}`}</h1>
-=======
-      
-    }
-    else if(this.state.isCorrect === false){
-      return result =
-        <div className="iscorrectFeedback">
-        <h1>Good try, but not quite right :(</h1>
-        <h2> The correct translation for {this.state.original} was {this.state.answer} and you chose {this.state.guess}!</h2>
-      </div>
-    
-    }
 
-    return (
       <section className="learning">
         <h1 className='learning-score'>
           {`Your total score is:${this.state.total}`}
         </h1>
         <div className="check-answer">
-          {!this.state.answer ? (
+          {!this.state.answer 
+          ? (
             <>
             <h1 className="translation">translate the word: </h1>
           <span className="next">{this.state.head}</span></>
           ) : (
             <div className="feedback">
-              {this.state.isCorrect ? result : result}
+              {this.state.correct ? result : result}
             </div>
           )
           }
@@ -139,7 +127,6 @@ class LearningRoute extends Component {
             className="guess-word-label">
               What's the translation for this word?
             </Label>
-
             <Input
             id="guess-word-input"
             type="text"
@@ -169,7 +156,7 @@ class LearningRoute extends Component {
         ) :(
           <div>Continuez à pratiquer, vous êtes un peu plus près d'aller en France!</div>
         )}
->>>>>>> 31f112ef572e101733ffabc6265171103917abaa
+
       </section>
     );
   }
