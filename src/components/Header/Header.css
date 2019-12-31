@@ -1,0 +1,28 @@
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+  background-color: #f1edff;
+}
+
+.Header__secondaryText {
+  font-size: 20px;
+}
+
+.Header__login_nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+}
+
+.Header__btn {
+  display: grid;
+  place-items: center;
+  height: 35px;
+  width: 100px;
+  background-color: #5a72ff;
+  border-radius: 15px;
+}

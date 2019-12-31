@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+
+h1 {
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover,
+a:visited {
+  color: black;
+}
