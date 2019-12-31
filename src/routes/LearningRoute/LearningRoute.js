@@ -74,38 +74,20 @@ class LearningRoute extends Component {
     if (this.state.correct === true) {
       result = (
         <>
-<<<<<<< HEAD
           <p className="LearningRoute__correct-feedback">You were correct! :D</p>
           <p className="LearningRoute__correct-translation">
             The correct translation for {this.state.original} was {this.state.answer}!
           </p>
-=======
-          <div className="correctFeedback">
-            <h1>You were correct! :D</h1>
-            <h2 className="correct-translation">
-              The correct translation for {this.state.original} was {this.state.answer} and you chose {this.state.guess}!
-            </h2>
-          </div>
->>>>>>> 3e489cefec38c774a7dd2518aab3673a69a101d5
         </>
       );
     } else if (this.state.correct === false) {
       result = (
         <>
-<<<<<<< HEAD
           <p className="LearningRoute__incorrect-feedback">Good try, but not quite right :(</p>
           <p className="LearningRoute__correct-translation">
             The correct translation for {this.state.original} was {this.state.answer} and you chose{' '}
             {this.state.guess}!
           </p>
-=======
-          <div className="correctFeedback">
-            <h1>Good try, but not quite right :(</h1>
-            <h2 className="correct-translation">
-              The correct translation for {this.state.original} was {this.state.answer} and you chose { this.state.guess}!
-            </h2>
-          </div>
->>>>>>> 3e489cefec38c774a7dd2518aab3673a69a101d5
         </>
       );
     }
