@@ -13,9 +13,9 @@ class Header extends Component {
 
   renderLogoutLink() {
     return (
-      <div>
+      <div className="Header__logout">
         <span>{this.context.user.name}</span>
-        <nav>
+        <nav className="Header__logout_nav">
           <Link onClick={this.handleLogoutClick} to="/login">
             <div className="Header__btn">Logout</div>
           </Link>
@@ -27,12 +27,7 @@ class Header extends Component {
   renderLoginLink() {
     return (
       <nav className="Header__login_nav">
-        <Link to="/login">
-          <div className="Header__btn">Login</div>
-        </Link>{' '}
-        <Link to="/register">
-          <div className="Header__btn">Sign up</div>
-        </Link>
+        <Link to="/login">Login</Link> <Link to="/register">Sign up</Link>
       </nav>
     );
   }
@@ -40,7 +35,7 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <h1>
+        <h1 className="Header__primaryText">
           <Link to="/">Le Baguette</Link>
         </h1>
         <h2 className="Header__secondaryText">Spaced Repetition Learning</h2>

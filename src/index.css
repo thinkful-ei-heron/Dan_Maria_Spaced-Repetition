@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Noto+Sans');
 
 * {
   box-sizing: border-box;
@@ -7,11 +7,23 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
 }
 
 :root {
   --font-size: calc(10px + 1vmin);
+}
+
+a {
+  font-size: 1em;
+  color: #3b59ff;
+  text-decoration: none;
+}
+
+a:hover,
+a:visited {
+  color: #3b59ff;
 }

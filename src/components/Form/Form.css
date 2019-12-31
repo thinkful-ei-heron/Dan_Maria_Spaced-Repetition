@@ -1,0 +1,11 @@
+label {
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #f5f5f5;
+  border: 1px solid #b1b1b1;
+}

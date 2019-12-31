@@ -3,26 +3,55 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 15px;
   padding-bottom: 20px;
-  background-color: #f1edff;
+  background-color: #e5ddff;
+}
+
+.Header__primaryText {
+  font-family: 'Fira Sans', sans-serif;
+  font-style: italic;
+  font-size: 36px;
+  margin-bottom: 0;
+  color: black;
+}
+
+.Header .Header__primaryText a:hover,
+.Header__primaryText a:visited {
+  color: black;
 }
 
 .Header__secondaryText {
   font-size: 20px;
 }
 
-.Header__login_nav {
+.Header__login_nav,
+.Header__logout {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.Header__login_nav {
   width: 70%;
 }
 
-.Header__btn {
-  display: grid;
-  place-items: center;
-  height: 35px;
-  width: 100px;
-  background-color: #5a72ff;
-  border-radius: 15px;
+.Header__logout {
+  width: 80%;
+}
+
+.Header__login_nav a,
+.Header__logout_nav a {
+  font-size: 18px;
+  font-weight: bold;
+  color: #5a72ff;
+}
+
+.Header__login_nav a:hover,
+.Header__login_nav a:visited,
+.Header__logout_nav a:hover,
+.Header__logout_nav a:visited {
+  font-size: 18px;
+  font-weight: bold;
+  color: #3b59ff;
 }
