@@ -1,6 +1,7 @@
  # Spaced Repitition
 
  # About
+ Before taking a trip to France, learn to essential words quickly and effectivley! This application uses space repetition flashcards that keep track of your score. It also displays your score for every word you are learning, letting you know how many times you got it right and how many times you git it wrong. I allows users to create personailzed accounts that siplays their name on the top of the dashboard and lets them keep track of their progress by loggin into their account. 
  
 
 ## Live page can be found here !

@@ -75,8 +75,7 @@ class LearningRoute extends Component {
           <div className="correctFeedback">
             <h1>You were correct! :D</h1>
             <h2 className="correct-translation">
-              The correct translation for {this.state.original} was {this.state.answer} and you chose
-              {this.state.guess}!
+              The correct translation for {this.state.original} was {this.state.answer} and you chose {this.state.guess}!
             </h2>
           </div>
         </>
@@ -87,8 +86,7 @@ class LearningRoute extends Component {
           <div className="correctFeedback">
             <h1>Good try, but not quite right :(</h1>
             <h2 className="correct-translation">
-              The correct translation for {this.state.original} was {this.state.answer} and you chose
-              {this.state.guess}!
+              The correct translation for {this.state.original} was {this.state.answer} and you chose { this.state.guess}!
             </h2>
           </div>
         </>
