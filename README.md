@@ -22,15 +22,15 @@ Server: [Server](https://github.com/thinkful-ei-heron/Dan_Maria_Spaced-Repititio
 
 ## Screen Shots
 ### Registration page 
-![Registration page](./images/)
+![Registration page](./images/main.png)
 ### Login Page
-![Login page](./images/)
+![Login page](./images/login.png)
 ### Dashboard
-![](./images/)
+![](./images/dashboard.png)
 ### Learning Page
-![](./images/)
+![](./images/learn.png)
 ### Learning Feedback Page
-![](./images/)
+![](./images/feedback.png)
 
 
 created by : Daniel Wagner and Maria Danielson 2019
