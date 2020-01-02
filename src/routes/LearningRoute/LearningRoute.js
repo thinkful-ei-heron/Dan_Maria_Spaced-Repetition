@@ -3,7 +3,6 @@ import config from '../../config';
 import TokenService from '../../services/token-service';
 import { Label, Input } from '../../components/Form/Form';
 import Button from '../../components/Button/Button';
-import { directiveLiteral } from 'babel-types';
 
 class LearningRoute extends Component {
   state = {
@@ -65,8 +64,7 @@ class LearningRoute extends Component {
 
   handleguess = e => {
     const guess = e.target.value;
-    let string = guess.toLowerCase();
-    this.setState({ guess: string });
+    this.setState({ guess: guess });
   };
 
   render() {
@@ -101,7 +99,7 @@ class LearningRoute extends Component {
         <div className="LearningRoute__check-answer">
           {!this.state.answer ? (
             <>
-              <h1 className="LearningRoute__translate">Translate the word: </h1>
+              <h2 className="LearningRoute__translate">Translate the word:</h2>
               <span className="LearningRoute__word">{this.state.head}</span>
             </>
           ) : (
@@ -114,7 +112,7 @@ class LearningRoute extends Component {
               What's the translation for this word?
             </Label>
             <Input
-              id="guess-word-input"
+              id="guess-word"
               type="text"
               value={this.state.guess}
               onChange={e => this.handleguess(e)}
@@ -132,7 +130,8 @@ class LearningRoute extends Component {
         )}
         {!this.state.answer ? (
           <div className="LearningRoute__correct-incorrect-info">
-            <span>You have answered this word correctly {this.state.correctcount} times!</span>
+            <p>You have answered this word correctly {this.state.correctcount} times!</p>
+            <p>You have answered this word incorrectly {this.state.incorrectcount} times!</p>
           </div>
         ) : (
           <div className="LearningRoute__correct-incorrect-info">

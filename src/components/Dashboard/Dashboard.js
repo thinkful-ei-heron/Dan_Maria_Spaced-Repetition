@@ -30,7 +30,7 @@ export class Dashboard extends Component {
     return (
       <section className="Dashboard">
         <div className="Dashboard__header">
-          <h1>{this.state.language.name}</h1>
+          <h2>{this.state.language.name}</h2>
           <span className="total">Total Score: {this.state.language.total_score}</span>
         </div>
 
@@ -41,8 +41,8 @@ export class Dashboard extends Component {
         </section>
 
         <section>
-          <h1 className="Dashboard__words_header">Words to Practice</h1>
-          <h2>
+          <h3 className="Dashboard__words_header">Words to Practice</h3>
+          <div>
             <ul className="Dashboard__list">
               {this.state.words.map((word, index) => {
                 return (
@@ -56,7 +56,7 @@ export class Dashboard extends Component {
                 );
               })}
             </ul>
-          </h2>
+          </div>
         </section>
       </section>
     );

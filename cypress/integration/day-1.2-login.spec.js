@@ -229,7 +229,7 @@ describe(`User story: Login`, function() {
       });
     });
 
-    it.only(`refreshes tokens loaded from localStorage`, () => {
+    it(`refreshes tokens loaded from localStorage`, () => {
       cy.login()
         .clock()
         .visit('/');

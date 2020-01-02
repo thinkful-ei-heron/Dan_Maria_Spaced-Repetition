@@ -9,7 +9,7 @@ const IdleService = {
   },
   resetIdleTimer(ev) {
     clearTimeout(_timeoutId);
-    _timeoutId = setTimeout(_idleCallback, 10000);
+    _timeoutId = setTimeout(_idleCallback, _FIVE_MINUTES_IN_MS);
   },
   regiserIdleTimerResets() {
     _notIdleEvents.forEach(event => document.addEventListener(event, IdleService.resetIdleTimer, true));

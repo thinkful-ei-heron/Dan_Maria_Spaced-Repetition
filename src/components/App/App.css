@@ -229,6 +229,10 @@ main {
     margin-bottom: 20px;
   }
 
+  .Dashboard__guessed {
+    width: 200px;
+  }
+
   .LearningRoute__score {
     position: absolute;
     right: 50px;

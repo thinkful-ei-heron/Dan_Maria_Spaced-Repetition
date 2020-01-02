@@ -25,21 +25,37 @@ describe(`User story: User's dashboard`, function() {
   });
 
   beforeEach(() => {
-    cy.login().visit('/');
+    //cy.login();
+    const loginUser = {
+      username: 'admin',
+      password: 'pass'
+    };
+    cy.visit('/login');
+
+    cy.get('main form')
+      .within($form => {
+        cy.get('#login-username-input').type(loginUser.username);
+        cy.get('#login-password-input').type(loginUser.password);
+        cy.root().submit();
+      })
+      .wait(1000);
   });
 
   it('has h2 with title, total score, subtitle and link', () => {
     cy.fixture('language.json').then(({ language }) => {
+      console.log(language);
       cy.get('main section').within($section => {
+        console.log($section);
         cy.get('h2').should('contain', language.name);
 
-        cy.root().should('contain', `Total correct answers: ${language.total_score}`);
+        console.log(cy.root());
+        cy.get('.total').should('contain', `Total Score: ${language.total_score}`);
 
         cy.get('a')
           .should('have.attr', 'href', '/learn')
-          .and('have.text', 'Start practicing');
+          .and('have.text', 'Start Practicing!');
 
-        cy.get('h3').should('have.text', 'Words to practice');
+        cy.get('h3').should('have.text', 'Words to Practice');
       });
     });
   });
@@ -51,11 +67,11 @@ describe(`User story: User's dashboard`, function() {
         cy.get('main section li')
           .eq(idx)
           .within($li => {
-            cy.get('h4').should('have.text', word.original);
+            cy.get('.Dashboard__original').should('have.text', word.original);
 
-            cy.root().should('contain', `correct answer count: ${word.correct_count}`);
+            cy.root().should('contain', `correct: ${word.correct_count}`);
 
-            cy.root().should('contain', `incorrect answer count: ${word.incorrect_count}`);
+            cy.root().should('contain', `incorrect: ${word.incorrect_count}`);
           });
       });
     });
