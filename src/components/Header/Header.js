@@ -16,8 +16,8 @@ class Header extends Component {
       <div className="Header__logout">
         <span>{this.context.user.name}</span>
         <nav className="Header__logout_nav">
-          <Link onClick={this.handleLogoutClick} to="/login">
-            <div className="Header__btn">Logout</div>
+          <Link className="Header__btn" onClick={this.handleLogoutClick} to="/login">
+            <div>Logout</div>
           </Link>
         </nav>
       </div>

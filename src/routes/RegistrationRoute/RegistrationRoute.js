@@ -19,7 +19,7 @@ class RegistrationRoute extends Component {
         <p className="RegistrationRoute__text">
           Practice learning a language with the spaced reptition revision technique.
         </p>
-        <h2>Sign up</h2>
+        <h2 className="form_header">Sign up</h2>
         <RegistrationForm onRegistrationSuccess={this.handleRegistrationSuccess} />
       </section>
     );

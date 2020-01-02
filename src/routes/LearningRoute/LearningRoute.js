@@ -3,6 +3,7 @@ import config from '../../config';
 import TokenService from '../../services/token-service';
 import { Label, Input } from '../../components/Form/Form';
 import Button from '../../components/Button/Button';
+import { directiveLiteral } from 'babel-types';
 
 class LearningRoute extends Component {
   state = {
@@ -74,26 +75,28 @@ class LearningRoute extends Component {
     if (this.state.correct === true) {
       result = (
         <>
-          <p className="LearningRoute__correct-feedback">You were correct! :D</p>
+          <p className="LearningRoute__correct">You were correct! :D</p>
           <p className="LearningRoute__correct-translation">
-            The correct translation for {this.state.original} was {this.state.answer}!
+            The correct translation for <span className="LearningRoute__correct">{this.state.original}</span>{' '}
+            was <span className="LearningRoute__correct">{this.state.answer}</span>!
           </p>
         </>
       );
     } else if (this.state.correct === false) {
       result = (
         <>
-          <p className="LearningRoute__incorrect-feedback">Good try, but not quite right :(</p>
+          <p className="LearningRoute__incorrect">Good try, but not quite right :(</p>
           <p className="LearningRoute__correct-translation">
-            The correct translation for {this.state.original} was {this.state.answer} and you chose{' '}
-            {this.state.guess}!
+            The correct translation for <span className="LearningRoute__correct">{this.state.original}</span>{' '}
+            was <span className="LearningRoute__correct">{this.state.answer}</span> and you chose{' '}
+            <span className="LearningRoute__incorrect">{this.state.guess}</span>!
           </p>
         </>
       );
     }
 
     return (
-      <section className="learning">
+      <section className="LearningRoute__container">
         <div className="LearningRoute__score">{`Your total score is: ${this.state.total}`}</div>
         <div className="LearningRoute__check-answer">
           {!this.state.answer ? (

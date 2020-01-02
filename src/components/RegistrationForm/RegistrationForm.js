@@ -40,35 +40,35 @@ class RegistrationForm extends Component {
   render() {
     const { error } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="form" onSubmit={this.handleSubmit}>
         <div role="alert">{error && <p>{error}</p>}</div>
-        <div className="Form__section">
+        <div className="form__section">
           <Label htmlFor="registration-name-input">
             Enter your name
             <Required />
           </Label>
           <Input ref={this.firstInput} id="registration-name-input" name="name" required />
         </div>
-        <div className="Form__section">
+        <div className="form__section">
           <Label htmlFor="registration-username-input">
             Choose a username
             <Required />
           </Label>
           <Input id="registration-username-input" name="username" required />
         </div>
-        <div className="Form__section">
+        <div className="form__section">
           <Label htmlFor="registration-password-input">
             Choose a password
             <Required />
           </Label>
           <Input id="registration-password-input" name="password" type="password" required />
         </div>
-        <footer className="Form__footer">
-          <Button className="Form__btn" type="submit">
+        <footer className="form__footer">
+          <Button className="form__btn" type="submit">
             Sign up
           </Button>{' '}
           Already have an account?
-          <Link className="Form__btn" to="/login">
+          <Link className="form__btn" to="/login">
             Login
           </Link>
         </footer>
