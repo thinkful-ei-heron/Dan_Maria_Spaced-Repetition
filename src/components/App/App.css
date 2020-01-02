@@ -1,6 +1,7 @@
 main {
   margin: 0 auto;
   width: 90%;
+  text-align: center;
 }
 
 .form__section,
@@ -65,6 +66,7 @@ main {
 
 .Dashboard__words_header {
   font-size: 1.4rem;
+  text-align: center;
 }
 
 .Dashboard__list {
@@ -76,11 +78,11 @@ main {
 
 .Dashboard__li {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  height: 40px;
-  padding-left: 10px;
-  padding-right: 10px;
+  height: 60px;
+  /* padding-left: 20px;
+  padding-right: 20px; */
 }
 
 .Dashboard__li:nth-child(even) {
@@ -91,14 +93,14 @@ main {
   background-color: #d0c2fd;
 }
 
-.Dashboard__guessed {
-  display: flex;
-  justify-content: space-between;
-  width: 160px;
-}
 
 .Dashboard__original {
   margin-right: 15px;
+  font-size: 1.2rem;
+}
+
+.Dashboard__guessed {
+  margin-left: 15px;
   font-size: 1.2rem;
 }
 
@@ -205,6 +207,12 @@ main {
     font-weight: 600;
   }
 
+  .Dashboard__guessed {
+    width: 200px;
+    font-size: 0.95rem;
+    
+  }
+
   .Dashboard__correct-words,
   .Dashboard__inocrrect-words {
     font-size: 0.85rem;
@@ -229,9 +237,6 @@ main {
     margin-bottom: 20px;
   }
 
-  .Dashboard__guessed {
-    width: 200px;
-  }
 
   .LearningRoute__score {
     position: absolute;
