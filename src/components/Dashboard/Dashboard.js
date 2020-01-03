@@ -32,7 +32,7 @@ export class Dashboard extends Component {
             <h2>{this.state.language.name}</h2>
             <span className="total">Total Score: {this.state.language.total_score}</span>
           </div>
-
+      
           <section className="Dashboard__btn">
             <Link to="/learn" className="Dashboard__link">
               Start Practicing!
@@ -58,7 +58,7 @@ export class Dashboard extends Component {
             </div>
           </section>
         </section>
-      );
+      )
     }
   }
 }
