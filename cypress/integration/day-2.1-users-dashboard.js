@@ -30,12 +30,9 @@ describe(`User story: User's dashboard`, function() {
 
   it('has h2 with title, total score, subtitle and link', () => {
     cy.fixture('language.json').then(({ language }) => {
-      console.log(language);
       cy.get('main section').within($section => {
-        console.log($section);
         cy.get('h2').should('contain', language.name);
 
-        console.log(cy.root());
         cy.get('.total').should('contain', `Total Score: ${language.total_score}`);
 
         cy.get('a')
