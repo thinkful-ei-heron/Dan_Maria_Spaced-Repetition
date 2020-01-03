@@ -7,18 +7,16 @@
 ### username : admin
 ### password: pass
 
-## Live page can be found here !
-### ZEIT:
+
 [click here for live page](https://spaced-repetition-app.mal3905.now.sh/learn)
 
 
 ## Technoligies Used
-Client side: React, Javascript, HTML and CSS
+Client side: React, Javascript, Zeit, HTML and CSS
 Server side: Express.js, Node.js, PostgreSQL
 
-## Links to code 
-Client : [Client](https://github.com/thinkful-ei-heron/Dan_Maria_Spaced-Repetition.git)
-Server: [Server](https://github.com/thinkful-ei-heron/Dan_Maria_Spaced-Repitition-API.git)
+## Links to repos
+[Client](https://github.com/thinkful-ei-heron/Dan_Maria_Spaced-Repetition.git)| [Server](https://github.com/thinkful-ei-heron/Dan_Maria_Spaced-Repitition-API.git)
 
 ## Screen Shots
 ### Registration page 
