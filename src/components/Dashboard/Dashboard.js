@@ -32,7 +32,7 @@ export class Dashboard extends Component {
             <h2>{this.state.language.name}</h2>
             <span className="total">Total Score: {this.state.language.total_score}</span>
           </div>
-
+      
           <section className="Dashboard__btn">
             <Link to="/learn" className="Dashboard__link">
               Start Practicing!
@@ -47,18 +47,19 @@ export class Dashboard extends Component {
                 return (
                   <li className="Dashboard__li" key={index}>
                     <span className="Dashboard__original">{word.original}</span>
-                    <div className="Dashboard__guessed">{word.translation}</div>
+                    {/* <div className="Dashboard__guessed">{word.translation}</div> */}
                     <div className="Dashboard__guessed">
                       <div className="Dashboard__correct-words">correct: {word.correct_count}</div>
                       <div className="Dashboard__inocrrect-words">incorrect: {word.incorrect_count}</div>
                     </div>
                   </li>
-                );
+                )
               })}
             </ul>
           </div>
         </section>
-      );
+        </section>
+      )
     }
   }
 }
