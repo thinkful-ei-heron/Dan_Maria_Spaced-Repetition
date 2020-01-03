@@ -3,8 +3,8 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
   color: #2c2c2c;
   background-image: linear-gradient(to bottom, #c1aeff 5%, #dfd6ff 60%);
 }
@@ -51,7 +51,7 @@ header img {
 .Header__logout_nav a {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #5a72ff;
+  color: #5e3aff;
 }
 
 .Header__login_nav a:hover,
@@ -60,7 +60,7 @@ header img {
 .Header__logout_nav a:visited {
   font-size: 1.1rem;
   font-weight: bold;
-  color: #5a72ff;
+  color: #5e3aff;
 }
 
 @media only screen and (min-width: 700px) {

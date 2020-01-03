@@ -26,11 +26,10 @@ main {
   height: 35px;
   width: 100px;
   margin: 10px auto;
-  background-color: #5a72ff;
+  background-color: #5e3aff;
   border-radius: 12px;
   border: none;
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.2rem;
   color: #f1edff;
 }
 
@@ -58,7 +57,7 @@ main {
   }
 
   .RegistrationRoute__text {
-    margin: 30px auto;
+    margin-top: 15px;
   }
 
   .form_header {

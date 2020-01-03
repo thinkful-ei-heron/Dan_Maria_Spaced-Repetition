@@ -164,8 +164,6 @@ describe(`User story: Login`, function() {
           .window()
           .then(win => {
             const tokenInStorage = win.localStorage.getItem(Cypress.env('TOKEN_KEY'));
-            console.log("TCL: Cypress.env('TOKEN_KEY')", Cypress.env('TOKEN_KEY'));
-            console.log('TCL: win.localStorage', win.localStorage);
 
             expect(tokenInStorage).to.eql(loginToken);
           });
@@ -178,7 +176,6 @@ describe(`User story: Login`, function() {
       cy.login().visit('/login');
 
       cy.get('header').within($header => {
-        console.log($header);
         cy.contains('Test name of user').should('exist');
         cy.get('nav a')
           .should('have.length', 1)
