@@ -1,0 +1,44 @@
+.Score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 230px;
+  margin-bottom: 20px;
+}
+
+.Score__text {
+  width: 180px;
+  text-align: center;
+}
+
+.Score__meter,
+.Score__fill {
+  display: inline-block;
+  width: 180px;
+  height: 20px;
+}
+
+.Score__meter {
+  background-color: rgb(109, 202, 140);
+}
+
+.Score__fill {
+  background-color: rgb(21, 190, 77);
+}
+
+img {
+  width: 50px;
+  height: auto;
+}
+
+@media only screen and (min-width: 700px) {
+  .Score {
+    margin-top: 25px;
+    margin-bottom: 110px;
+  }
+  .Score__text,
+  .Score__meter,
+  .Score__fill {
+    width: 190px;
+  }
+}

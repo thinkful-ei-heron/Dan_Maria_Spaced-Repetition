@@ -17,8 +17,8 @@ Cypress.Commands.add('login', (options = {}) => {
   cy.visit('/login')
     .window()
     .then(win => {
-      //win.localStorage.setItem(Cypress.env('TOKEN_KEY'), helpers.makeLoginToken());
-      Cypress.env('TOKEN_KEY', helpers.makeLoginToken());
-      console.log(Cypress.env('TOKEN_KEY'));
+      win.localStorage.setItem(Cypress.env('TOKEN_KEY'), helpers.makeLoginToken());
+      //Cypress.env('TOKEN_KEY', helpers.makeLoginToken());
+      //console.log(Cypress.env('TOKEN_KEY'));
     });
 });

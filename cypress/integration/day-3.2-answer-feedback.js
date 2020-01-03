@@ -20,10 +20,10 @@ describe(`User story: Answer feedback`, function() {
         method: 'GET',
         url: `/api/language/head`,
         status: 200,
-        response: 'fixture:language-head.json',
+        response: 'fixture:language-head.json'
       })
-      .as('languageHeadRequest')
-  })
+      .as('languageHeadRequest');
+  });
 
   context(`Given I submit my answer`, () => {
     beforeEach(() => {
@@ -31,136 +31,109 @@ describe(`User story: Answer feedback`, function() {
         method: 'POST',
         url: `/api/language/guess`,
         status: 200,
-        response: 'fixture:language-guess-generic.json',
-      })
-        .as('postListGuess')
-    })
+        response: 'fixture:language-guess-generic.json'
+      }).as('postListGuess');
+    });
 
     it(`submits my answer typed in the form`, () => {
-      const guess = 'my-test-guess'
+      const guess = 'my-test-guess';
 
-      cy.login().visit(`/learn`)
-      cy.wait('@languageHeadRequest')
+      cy.login().visit(`/learn`);
+      cy.wait('@languageHeadRequest');
 
       cy.get('main form').within($form => {
-        cy.get('input#learn-guess-input')
-          .type(guess)
+        cy.get('input#guess-word').type(guess);
 
-        cy.get('button').click()
+        cy.get('button').click();
 
-        cy.wait('@postListGuess')
-          .then(xhr => {
-            expect(xhr.request.body).to.eql({ guess })
-          })
-      })
-    })
-  })
+        cy.wait('@postListGuess').then(xhr => {
+          expect(xhr.request.body).to.eql({ guess });
+        });
+      });
+    });
+  });
 
   context(`Given guess is incorrect`, () => {
-    const guess = 'test-guess-incorrect'
+    const guess = 'test-guess-incorrect';
 
     beforeEach(() => {
-      cy.route({
-        method: 'POST',
-        url: `/api/language/guess`,
-        status: 200,
-        response: 'fixture:language-guess-incorrect.json',
-      })
-        .as('postListGuessIncorrect')
+      cy.login()
+        .route({
+          method: 'POST',
+          url: `/api/language/guess`,
+          status: 200,
+          response: 'fixture:language-guess-incorrect.json'
+        })
+        .as('postListGuessIncorrect');
 
-      cy.login().visit(`/learn`).wait('@languageHeadRequest')
-      cy.get('input#learn-guess-input').type(guess)
-      cy.get('form').submit().wait('@postListGuessIncorrect')
-    })
+      cy.visit(`/learn`).wait('@languageHeadRequest');
+      cy.get('input#guess-word').type(guess);
+      cy.get('form')
+        .submit()
+        .wait('@postListGuessIncorrect');
+    });
 
     it(`displays score and feedback the word was incorrect`, () => {
       //  cypress fixtures has buggy behaviour, this works around it o_O
-      const fixtures = []
+      const fixtures = [];
       Cypress.Promise.all([
-        cy.fixture('language-head.json')
-          .then(langHeadFx => fixtures.push(langHeadFx)),
-        cy.fixture('language-guess-incorrect.json')
-          .then(langGuessIncFx => fixtures.push(langGuessIncFx)),
+        cy.fixture('language-head.json').then(langHeadFx => fixtures.push(langHeadFx)),
+        cy.fixture('language-guess-incorrect.json').then(langGuessIncFx => fixtures.push(langGuessIncFx))
       ]).then(() => {
-        const [languageHeadFixture, incorrectFixture] = fixtures
+        const [languageHeadFixture, incorrectFixture] = fixtures;
 
         cy.get('main').within($main => {
-          cy.get('.DisplayScore p')
-            .should(
-              'have.text',
-              `Your total score is: ${incorrectFixture.totalScore}`,
-            )
-          cy.get('h2')
-            .should(
-              'have.text',
-              `Good try, but not quite right :(`,
-            )
-          cy.get('.DisplayFeedback p')
-            .should(
-              'have.text',
-              `The correct translation for ${languageHeadFixture.nextWord} was ${incorrectFixture.answer} and you chose ${guess}!`,
-            )
-          cy.get('button')
-            .should(
-              'have.text',
-              `Try another word!`,
-            )
-        })
-      })
-    })
-  })
+          cy.get('.Score__text').should('have.text', `Your total score is: ${incorrectFixture.totalScore}`);
+          cy.get('.feedback').should('contain', `Good try, but not quite right`);
+          cy.get('.feedback').should(
+            'contain',
+            `The correct translation for ${languageHeadFixture.nextWord} was ${incorrectFixture.answer} and you chose ${guess}!`
+          );
+          cy.get('button').should('have.text', `Try another word!`);
+        });
+      });
+    });
+  });
 
   context(`Given guess is correct`, () => {
-    const guess = 'test-guess-incorrect'
+    const guess = 'test-guess-incorrect';
 
     beforeEach(() => {
       cy.route({
         method: 'POST',
         url: `/api/language/guess`,
         status: 200,
-        response: 'fixture:language-guess-correct.json',
-      })
-        .as('postListGuessCorrect')
+        response: 'fixture:language-guess-correct.json'
+      }).as('postListGuessCorrect');
 
-      cy.login().visit(`/learn`).wait('@languageHeadRequest')
-      cy.get('input#learn-guess-input').type(guess)
-      cy.get('form').submit().wait('@postListGuessCorrect')
-    })
+      cy.login()
+        .visit(`/learn`)
+        .wait('@languageHeadRequest');
+      cy.get('input#guess-word').type(guess);
+      cy.get('form')
+        .submit()
+        .wait('@postListGuessCorrect');
+    });
 
     it(`gives feedback the word was correct`, () => {
       //  cypress fixtures has buggy behaviour, this works around it o_O
-      const fixtures = []
+      const fixtures = [];
       Cypress.Promise.all([
-        cy.fixture('language-head.json')
-          .then(fx => fixtures.push(fx)),
-        cy.fixture('language-guess-correct.json')
-          .then(fx => fixtures.push(fx)),
+        cy.fixture('language-head.json').then(fx => fixtures.push(fx)),
+        cy.fixture('language-guess-correct.json').then(fx => fixtures.push(fx))
       ]).then(() => {
-        const [languageHeadFixture, incorrectFixture] = fixtures
+        const [languageHeadFixture, incorrectFixture] = fixtures;
 
         cy.get('main').within($main => {
-          cy.get('.DisplayScore p')
-            .should(
-              'have.text',
-              `Your total score is: ${incorrectFixture.totalScore}`,
-            )
-          cy.get('h2')
-            .should(
-              'have.text',
-              `You were correct! :D`,
-            )
-          cy.get('.DisplayFeedback p')
-            .should(
-              'have.text',
-              `The correct translation for ${languageHeadFixture.nextWord} was ${incorrectFixture.answer} and you chose ${guess}!`,
-            )
-          cy.get('button')
-            .should(
-              'have.text',
-              `Try another word!`,
-            )
-        })
-      })
-    })
-  })
-})
+          cy.get('.Score__text').should('have.text', `Your total score is: ${incorrectFixture.totalScore}`);
+          cy.get('.feedback').should('contain', `You were correct!`);
+          cy.get('.feedback').should(
+            'contain',
+            `The correct translation for ${languageHeadFixture.nextWord} was ${incorrectFixture.answer}!`
+          );
+          cy.get('button').should('have.text', `Try another word!`);
+        });
+      });
+    });
+  });
+});

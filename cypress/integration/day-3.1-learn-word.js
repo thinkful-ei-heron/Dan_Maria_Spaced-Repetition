@@ -23,24 +23,10 @@ describe(`User story: Presented with word`, function() {
       .as('languageHeadRequest');
   });
 
-  beforeEach(() => {
-    const loginUser = {
-      username: 'admin',
-      password: 'pass'
-    };
-    cy.visit('/login');
-
-    cy.get('main form')
-      .within($form => {
-        cy.get('#login-username-input').type(loginUser.username);
-        cy.get('#login-password-input').type(loginUser.password);
-        cy.root().submit();
-      })
-      .wait(1000);
-  });
-
   it('displays the current score and h2 with next word', () => {
-    cy.visit(`/learn`).wait('@languageHeadRequest');
+    cy.login()
+      .visit(`/learn`)
+      .wait('@languageHeadRequest');
 
     cy.fixture('language-head.json').then(languageHeadFixture => {
       cy.get('main').within($main => {
@@ -49,15 +35,14 @@ describe(`User story: Presented with word`, function() {
           .siblings('span')
           .should('have.text', languageHeadFixture.nextWord);
       });
-      cy.get('.LearningRoute__score').should(
-        'have.text',
-        `Your total score is: ${languageHeadFixture.totalScore}`
-      );
+      cy.get('.Score__text').should('have.text', `Your total score is: ${languageHeadFixture.totalScore}`);
     });
   });
 
   it(`displays a form for submitting the next guess`, () => {
-    cy.visit(`/learn`).wait('@languageHeadRequest');
+    cy.login()
+      .visit(`/learn`)
+      .wait('@languageHeadRequest');
 
     cy.get('main form').within($form => {
       cy.get('label[for=guess-word]').should('have.text', `What's the translation for this word?`);
@@ -71,7 +56,9 @@ describe(`User story: Presented with word`, function() {
   });
 
   it(`displays the correct and incorrect count for this word`, () => {
-    cy.visit(`/learn`).wait('@languageHeadRequest');
+    cy.login()
+      .visit(`/learn`)
+      .wait('@languageHeadRequest');
 
     cy.fixture('language-head.json').then(languageHeadFixture => {
       cy.get('main').within($main => {

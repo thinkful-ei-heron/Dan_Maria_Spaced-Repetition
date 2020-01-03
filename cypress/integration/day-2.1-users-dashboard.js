@@ -25,20 +25,7 @@ describe(`User story: User's dashboard`, function() {
   });
 
   beforeEach(() => {
-    //cy.login();
-    const loginUser = {
-      username: 'admin',
-      password: 'pass'
-    };
-    cy.visit('/login');
-
-    cy.get('main form')
-      .within($form => {
-        cy.get('#login-username-input').type(loginUser.username);
-        cy.get('#login-password-input').type(loginUser.password);
-        cy.root().submit();
-      })
-      .wait(1000);
+    cy.login().visit('/');
   });
 
   it('has h2 with title, total score, subtitle and link', () => {

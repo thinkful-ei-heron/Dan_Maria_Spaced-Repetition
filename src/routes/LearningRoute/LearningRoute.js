@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import config from '../../config';
-import TokenService from '../../services/token-service';
+import Confetti from 'react-confetti';
 import { Label, Input } from '../../components/Form/Form';
 import Button from '../../components/Button/Button';
+import Loading from '../../components/Loading/Loading';
+import Score from '../../components/Score/Score';
+import LeBaguetteService from '../../services/leBaguette-service';
+import './LearningRoute.css';
 
 class LearningRoute extends Component {
   state = {
@@ -13,50 +16,38 @@ class LearningRoute extends Component {
     correctcount: '',
     incorrectcount: '',
     original: '',
-    correct: null
+    correct: null,
+    loading: true,
+    fetching: false
   };
   componentDidMount() {
-    fetch(`${config.API_ENDPOINT}/language/head`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${TokenService.getAuthToken()}`
-      }
-    })
-      .then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()))
-      .then(data => {
-        this.setState({
-          head: data.nextWord,
-          total: data.totalScore,
-          correctcount: data.wordCorrectCount,
-          incorrectcount: data.wordIncorrectCount,
-          original: data.nextWord
-        });
+    LeBaguetteService.getLanguageHead().then(data => {
+      this.setState({
+        head: data.nextWord,
+        total: data.totalScore,
+        correctcount: data.wordCorrectCount,
+        incorrectcount: data.wordIncorrectCount,
+        original: data.nextWord,
+        loading: false
       });
+    });
   }
   handleSubmit = e => {
     e.preventDefault();
-    fetch(`${config.API_ENDPOINT}/language/guess`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ guess: this.state.guess })
-    })
-      .then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res.json()))
-      .then(data => {
-        console.log(data);
-        let original = this.state.head;
-        this.setState({
-          head: data.nextWord,
-          answer: data.answer,
-          correct: data.isCorrect,
-          total: data.totalScore,
-          correctcount: data.wordCorrectCount,
-          incorrectcount: data.wordIncorrectCount,
-          original: original
-        });
+    this.setState({ fetching: true });
+    LeBaguetteService.postGuess(this.state.guess).then(data => {
+      let original = this.state.head;
+      this.setState({
+        head: data.nextWord,
+        answer: data.answer,
+        correct: data.isCorrect,
+        total: data.totalScore,
+        correctcount: data.wordCorrectCount,
+        incorrectcount: data.wordIncorrectCount,
+        original: original,
+        fetching: false
       });
+    });
   };
   handleNextWord = () => {
     this.setState({ answer: '', guess: '' });
@@ -67,23 +58,31 @@ class LearningRoute extends Component {
     this.setState({ guess: guess });
   };
 
-  render() {
-    console.log(this.state);
-    let result;
+  result() {
     if (this.state.correct === true) {
-      result = (
+      return (
         <>
-          <p className="LearningRoute__correct">You were correct! :D</p>
+          <p className="LearningRoute__correct">
+            You were correct!{' '}
+            <span role="img" aria-label="grinning face with smiling eyes">
+              😁
+            </span>
+          </p>
           <p className="LearningRoute__correct-translation">
             The correct translation for <span className="LearningRoute__correct">{this.state.original}</span>{' '}
             was <span className="LearningRoute__correct">{this.state.answer}</span>!
           </p>
         </>
       );
-    } else if (this.state.correct === false) {
-      result = (
+    } else {
+      return (
         <>
-          <p className="LearningRoute__incorrect">Good try, but not quite right :(</p>
+          <p className="LearningRoute__incorrect">
+            Good try, but not quite right{' '}
+            <span role="img" aria-label="confused face">
+              😕
+            </span>
+          </p>
           <p className="LearningRoute__correct-translation">
             The correct translation for <span className="LearningRoute__correct">{this.state.original}</span>{' '}
             was <span className="LearningRoute__correct">{this.state.answer}</span> and you chose{' '}
@@ -92,54 +91,65 @@ class LearningRoute extends Component {
         </>
       );
     }
+  }
 
-    return (
-      <section className="LearningRoute__container">
-        <div className="LearningRoute__score">{`Your total score is: ${this.state.total}`}</div>
-        <div className="LearningRoute__check-answer">
-          {!this.state.answer ? (
-            <>
-              <h2 className="LearningRoute__translate">Translate the word:</h2>
-              <span className="LearningRoute__word">{this.state.head}</span>
-            </>
+  render() {
+    if (this.state.loading) return <Loading className={'Loading'} />;
+    else {
+      return (
+        <section className="LearningRoute__container">
+          {(this.state.total === 10 || this.state.total === 35 || this.state.total === 100) &&
+            this.state.answer && <Confetti />}
+          <Score total={this.state.total} />
+          {this.state.fetching ? (
+            <Loading className={'Fetching'} />
           ) : (
-            <div className="feedback">{this.state.correct ? result : result}</div>
+            <div className="LearningRoute__check-answer">
+              {!this.state.answer ? (
+                <>
+                  <h2 className="LearningRoute__translate">Translate the word:</h2>
+                  <span className="LearningRoute__word">{this.state.head}</span>
+                </>
+              ) : (
+                <div className="feedback">{this.result()}</div>
+              )}
+            </div>
           )}
-        </div>
-        {!this.state.answer ? (
-          <form className="LearningRoute__form" onSubmit={e => this.handleSubmit(e)}>
-            <Label htmlFor="guess-word" className="guess-word-label">
-              What's the translation for this word?
-            </Label>
-            <Input
-              id="guess-word"
-              type="text"
-              value={this.state.guess}
-              onChange={e => this.handleguess(e)}
-              name="guess-word"
-              required
-            />
-            <Button className="LearningRoute__btn" type="submit">
-              Submit your answer
+          {!this.state.answer && !this.state.fetching ? (
+            <form className="LearningRoute__form" onSubmit={e => this.handleSubmit(e)}>
+              <Label htmlFor="guess-word" className="guess-word-label">
+                What's the translation for this word?
+              </Label>
+              <Input
+                id="guess-word"
+                type="text"
+                value={this.state.guess}
+                onChange={e => this.handleguess(e)}
+                name="guess-word"
+                required
+              />
+              <Button className="LearningRoute__btn" type="submit">
+                Submit your answer
+              </Button>
+            </form>
+          ) : (
+            <Button className="LearningRoute__btn" onClick={this.handleNextWord}>
+              Try another word!
             </Button>
-          </form>
-        ) : (
-          <Button className="LearningRoute__btn" onClick={this.handleNextWord}>
-            Try another word!
-          </Button>
-        )}
-        {!this.state.answer ? (
-          <div className="LearningRoute__correct-incorrect-info">
-            <p>You have answered this word correctly {this.state.correctcount} times!</p>
-            <p>You have answered this word incorrectly {this.state.incorrectcount} times!</p>
-          </div>
-        ) : (
-          <div className="LearningRoute__correct-incorrect-info">
-            Continuez à pratiquer, vous êtes un peu plus près d'aller en France!
-          </div>
-        )}
-      </section>
-    );
+          )}
+          {!this.state.answer ? (
+            <div className="LearningRoute__correct-incorrect-info">
+              <p>You have answered this word correctly {this.state.correctcount} times!</p>
+              <p>You have answered this word incorrectly {this.state.incorrectcount} times!</p>
+            </div>
+          ) : (
+            <div className="LearningRoute__encouragement">
+              Continuez à pratiquer, vous êtes un peu plus près d'aller en France!
+            </div>
+          )}
+        </section>
+      );
+    }
   }
 }
 

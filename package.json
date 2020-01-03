@@ -9,9 +9,12 @@
     "classnames": "^2.2.6",
     "jwt-decode": "^2.2.0",
     "react": "^16.8.3",
+    "react-confetti": "^5.0.1",
     "react-dom": "^16.8.3",
+    "react-loading": "^2.0.3",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^3.3.0"
+    "react-scripts": "^3.3.0",
+    "react-use-window-size": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

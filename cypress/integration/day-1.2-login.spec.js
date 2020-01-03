@@ -163,7 +163,8 @@ describe(`User story: Login`, function() {
         cy.wait('@loginRequest')
           .window()
           .then(win => {
-            const tokenInStorage = win.localStorage.getItem(undefined); //Cypress.env('TOKEN_KEY'));
+            const tokenInStorage = win.localStorage.getItem(Cypress.env('TOKEN_KEY'));
+            console.log("TCL: Cypress.env('TOKEN_KEY')", Cypress.env('TOKEN_KEY'));
             console.log('TCL: win.localStorage', win.localStorage);
 
             expect(tokenInStorage).to.eql(loginToken);
@@ -174,18 +175,7 @@ describe(`User story: Login`, function() {
     });
 
     it(`displays my user name and presents the logout button`, () => {
-      cy.login();
-      const loginUser = {
-        username: 'Test name of user',
-        password: 'test-secret'
-      };
-      cy.visit('/login');
-
-      cy.get('main form').within($form => {
-        cy.get('#login-username-input').type(loginUser.username);
-        cy.get('#login-password-input').type(loginUser.password);
-        cy.root().submit();
-      });
+      cy.login().visit('/login');
 
       cy.get('header').within($header => {
         console.log($header);
@@ -224,8 +214,8 @@ describe(`User story: Login`, function() {
 
         cy.wait('@loginRequest');
 
-        //cy.tick(20000).wait('@refreshRequest');
-        //cy.tick(20000).wait('@refreshRequest');
+        cy.tick(20000).wait('@refreshRequest');
+        cy.tick(20000).wait('@refreshRequest');
       });
     });
 
@@ -234,9 +224,8 @@ describe(`User story: Login`, function() {
         .clock()
         .visit('/');
 
-      cy.reload();
-      //cy.tick(20000).wait('@refreshRequest');
-      //cy.tick(20000).wait('@refreshRequest');
+      cy.tick(20000).wait('@refreshRequest');
+      cy.tick(20000).wait('@refreshRequest');
     });
 
     it(`doesn't redirect on page load when valid token in localStorage`, () => {

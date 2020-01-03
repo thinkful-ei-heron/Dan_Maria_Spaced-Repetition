@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 import UserContext from '../../contexts/UserContext';
 import './Header.css';
+import textBubbles from '../../images/textBubbles.png';
 
 class Header extends Component {
   static contextType = UserContext;
@@ -35,10 +36,13 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <h1 className="Header__primaryText">
-          <Link to="/">Le Baguette</Link>
-        </h1>
-        <h2 className="Header__secondaryText">Spaced Repetition Learning</h2>
+        <img src={textBubbles} alt="French and USA flags in text bubbles" />
+        <div className="Header__text_container">
+          <h1 className="Header__primaryText">
+            <Link to="/">Le Baguette</Link>
+          </h1>
+          <h2 className="Header__secondaryText">Spaced Repetition Learning</h2>
+        </div>
         {TokenService.hasAuthToken() ? this.renderLogoutLink() : this.renderLoginLink()}
       </header>
     );

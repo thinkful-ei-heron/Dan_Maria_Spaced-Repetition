@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Noto+Sans');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Lato');
 
 * {
   box-sizing: border-box;
@@ -8,10 +8,11 @@ body {
   position: relative;
   margin: 0;
   padding: 0;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
+  color: #2c2c2c;
+  background-color: #fcf9f5;
 }
 
 :root {
